@@ -1,34 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material/';
-import { ContextProvider } from './hooks/useStateContext';
+import axios from "axios";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-  typography:{
-    fontFamily:'"IBM Plex Sans"'
-  }
-})
+export const BASE_URL = "http://localhost:5041/";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ContextProvider>
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </ContextProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export const ENDPOINTS = {
+  participant: "participant",
+  question: "question",
+  getAnswers: "question/getanswers",
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+export const createAPIEndpoint = (endpoint) => {
+  let url = BASE_URL + "api/" + endpoint + "/";
+  return {
+    fetch: () => axios.get(url),
+    fetchById: (id) => axios.get(url + id),
+    post: (newRecord) => axios.post(url, newRecord),
+    put: (id, updatedRecord) => axios.put(url + id, updatedRecord),
+    delete: (id) => axios.delete(url + id),
+  };
+};
