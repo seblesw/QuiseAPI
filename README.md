@@ -1,6 +1,4 @@
-Quiz App
 This is a Quiz App built using React. It allows users to take quizzes on various topics and test their knowledge.
-
 Features
 User authentication: Users can sign up, log in, and log out to access the app.
 Quiz selection: Users can choose from a variety of quizzes available on different topics.
